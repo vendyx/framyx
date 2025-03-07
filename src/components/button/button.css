@@ -1,0 +1,13 @@
+.vendyx__button {
+  background-color: var(--vendyx-bg);
+  color: var(--vendyx-foreground);
+}
+.vendyx__button:hover {
+  background-color: var(--vendyx-bg);
+}
+.vendyx__button:active {
+  background-color: var(--vendyx-bg) !important;
+}
+.vendyx__button:focus {
+  background-color: var(--vendyx-bg) !important;
+}

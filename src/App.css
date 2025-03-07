@@ -1,10 +1,22 @@
 /* Your Plugin CSS */
 
-main {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    padding: 0 15px 15px 15px;
-    height: 100%;
-    gap: 15px;
+:root {
+  [data-framer-theme="dark"] {
+    --vendyx-bg: #FFF;
+    --vendyx-foreground: #000;
+  }
+  [data-framer-theme="light"] {
+    --vendyx-bg: #000;
+    --vendyx-foreground: #FFF;
+  }
 }
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+  height: 100vh;
+  padding: 16px;
+}
+
