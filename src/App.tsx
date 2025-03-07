@@ -1,6 +1,7 @@
 import { framer } from 'framer-plugin';
 import './App.css';
-import { LoginForm } from './components/login-form/login-form';
+import { Route, Routes } from 'react-router';
+import { ConnectPage } from './pages/connect/connect-page';
 
 framer.showUI({
   position: 'top right',
@@ -10,12 +11,8 @@ framer.showUI({
 
 export function App() {
   return (
-    <main>
-      <header className="login_header__container">
-        <h1>Vendyx</h1>
-        <p>Connect your store</p>
-      </header>
-      <LoginForm />
-    </main>
+    <Routes>
+      <Route path="/" element={<ConnectPage />} />
+    </Routes>
   );
 }
