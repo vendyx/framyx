@@ -1,18 +1,37 @@
-import { framer } from 'framer-plugin';
 import './App.css';
-import { Route, Routes } from 'react-router';
-import { ConnectPage } from './pages/connect/connect-page';
 
-framer.showUI({
-  position: 'top right',
-  width: 365,
-  height: 650
-});
+import { framer } from 'framer-plugin';
+import { Import } from './import';
+import { usePluginContext } from './plugin-context';
 
 export function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<ConnectPage />} />
-    </Routes>
-  );
+  const { mode } = usePluginContext();
+
+  if (mode === 'configureManagedCollection') {
+    framer.showUI({
+      position: 'center',
+      width: 450,
+      height: 280
+    });
+
+    return <Import />;
+  }
+
+  if (mode === 'canvas') {
+    framer.showUI({
+      position: 'top right',
+      width: 365,
+      height: 650
+    });
+
+    return (
+      <div>
+        <h1>Canvas</h1>
+      </div>
+    );
+  }
+
+  if (mode === 'syncManagedCollection') {
+    framer.notify('Syncing Managed Collection');
+  }
 }
