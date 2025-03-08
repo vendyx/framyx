@@ -5,8 +5,8 @@ export const fetcher = async (options: Options) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      x_vendyx_shop_api_key: options.shop_api_key,
-      shop_id: options.shop_id
+      x_vendyx_shop_api_key: options.shopApiKey,
+      shop_id: options.shopId
     },
     body: JSON.stringify({
       query: options.query,
@@ -27,6 +27,6 @@ export const fetcher = async (options: Options) => {
 type Options = {
   query: string;
   variables?: Record<string, unknown>;
-  shop_api_key: string;
-  shop_id: string;
+  shopApiKey: string;
+  shopId: string;
 };
