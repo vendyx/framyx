@@ -9,7 +9,7 @@ import { buildCollectionItems } from '@/vendyx/items';
 import { SYNCHRONIZE_QUERY } from '@/vendyx/operations';
 
 export const Import = () => {
-  const { isConnected, shopId, storefrontApiKey } = usePluginContext();
+  const { isConnected } = usePluginContext();
   const [isLoading, setIsLoading] = useState(false);
 
   const importProducts = async () => {
@@ -20,7 +20,7 @@ export const Import = () => {
 
     const {
       products: { items }
-    } = await fetcher({ query: SYNCHRONIZE_QUERY, storefrontApiKey, shopId });
+    } = await fetcher(SYNCHRONIZE_QUERY);
 
     const collectionItems: ManagedCollectionItemInput[] = items.map(buildCollectionItems);
 
@@ -30,7 +30,7 @@ export const Import = () => {
   };
 
   return (
-    <main className="import__container">
+    <main className="container import__container">
       <header className="import__header_container">
         <h2>Import your products from Vendyx</h2>
         <p>

@@ -1,8 +1,7 @@
-import './App.css';
-
 import { framer } from 'framer-plugin';
 import { Import } from './import';
 import { usePluginContext } from './plugin-context';
+import { Canvas } from './canvas';
 
 export function App() {
   const { mode } = usePluginContext();
@@ -24,10 +23,6 @@ export function App() {
       height: 650
     });
 
-    return (
-      <div>
-        <h1>Canvas</h1>
-      </div>
-    );
+    return <Canvas />;
   }
 }

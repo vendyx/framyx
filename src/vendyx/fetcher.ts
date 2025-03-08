@@ -1,16 +1,21 @@
+import { LocalStorageKeys } from '@/plugin-context';
+
 const BASE_URL = 'https://vendyx-api.up.railway.app/shop-api';
 
-export const fetcher = async (options: Options) => {
+export const fetcher = async (query: string, options?: Options) => {
+  const storefrontApiKey = window.localStorage.getItem(LocalStorageKeys.StorefrontApiKey) ?? '';
+  const shopId = window.localStorage.getItem(LocalStorageKeys.ShopId) ?? '';
+
   const response = await fetch(BASE_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      x_vendyx_shop_api_key: options.storefrontApiKey,
-      shop_id: options.shopId
+      x_vendyx_shop_api_key: storefrontApiKey,
+      shop_id: shopId
     },
     body: JSON.stringify({
-      query: options.query,
-      variables: options.variables
+      query: query,
+      variables: options?.variables
     })
   });
 
@@ -25,8 +30,5 @@ export const fetcher = async (options: Options) => {
 };
 
 type Options = {
-  query: string;
   variables?: Record<string, unknown>;
-  storefrontApiKey: string;
-  shopId: string;
 };
