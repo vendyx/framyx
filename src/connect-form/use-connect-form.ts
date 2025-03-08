@@ -28,7 +28,7 @@ export const useConnectForm = () => {
     setIsLoading(true);
     const check = await fetcher({
       query: CHECK_QUERY,
-      shopApiKey: form.storefrontApiKey,
+      storefrontApiKey: form.storefrontApiKey,
       shopId: form.shopId
     });
     setIsLoading(false);
