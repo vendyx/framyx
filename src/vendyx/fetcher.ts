@@ -11,7 +11,8 @@ export const fetcher = async (query: string, options?: Options) => {
     headers: {
       'Content-Type': 'application/json',
       x_vendyx_shop_api_key: storefrontApiKey,
-      shop_id: shopId
+      shop_id: shopId,
+      ...options?.headers
     },
     body: JSON.stringify({
       query: query,
@@ -31,4 +32,5 @@ export const fetcher = async (query: string, options?: Options) => {
 
 type Options = {
   variables?: Record<string, unknown>;
+  headers?: Record<string, string>;
 };

@@ -10,7 +10,7 @@ export const FieldsIds = {
 export const getInitialFields = (): EditableManagedCollectionField[] => [
   {
     id: FieldsIds.ImageId,
-    name: 'image',
+    name: 'Image',
     type: 'image'
   },
   {
