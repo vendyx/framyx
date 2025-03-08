@@ -1,4 +1,4 @@
-export const IMPORT_QUERY = `
+export const SYNCHRONIZE_QUERY = `
   query GetAllProducts {
     products {
       items {

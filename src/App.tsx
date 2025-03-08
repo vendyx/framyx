@@ -30,8 +30,4 @@ export function App() {
       </div>
     );
   }
-
-  if (mode === 'syncManagedCollection') {
-    framer.notify('Syncing Managed Collection');
-  }
 }

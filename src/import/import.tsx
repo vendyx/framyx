@@ -2,9 +2,11 @@ import './import.css';
 import { ConnectForm } from '@/connect-form';
 import { usePluginContext } from '@/plugin-context';
 import { fetcher } from '@/vendyx/fetcher';
-import { IMPORT_QUERY } from './import-query';
 import { framer, ManagedCollectionItemInput } from 'framer-plugin';
 import { useState } from 'react';
+import { getInitialFields } from '@/vendyx/fields';
+import { buildCollectionItems } from '@/vendyx/items';
+import { SYNCHRONIZE_QUERY } from '@/vendyx/operations';
 
 export const Import = () => {
   const { isConnected, shopId, storefrontApiKey } = usePluginContext();
@@ -14,50 +16,13 @@ export const Import = () => {
     setIsLoading(true);
     const collection = await framer.getActiveManagedCollection();
 
-    const nameId = 'ZfN0uPuHc';
-    const imageId = 'vUvFzeUxy';
-    const enabledId = 'RtU9eIhEY';
-    const descriptionId = 'zvN0uPuHc';
-
-    await collection.setFields([
-      {
-        id: imageId,
-        name: 'image',
-        type: 'image'
-      },
-      {
-        id: nameId,
-        name: 'Name',
-        type: 'string'
-      },
-      {
-        id: enabledId,
-        name: 'Enabled',
-        type: 'boolean'
-      },
-      {
-        id: descriptionId,
-        name: 'Description',
-        type: 'formattedText'
-      }
-    ]);
+    await collection.setFields(getInitialFields());
 
     const {
       products: { items }
-    } = await fetcher({ query: IMPORT_QUERY, storefrontApiKey, shopId });
+    } = await fetcher({ query: SYNCHRONIZE_QUERY, storefrontApiKey, shopId });
 
-    const collectionItems: ManagedCollectionItemInput[] = items.map(
-      (item: any): ManagedCollectionItemInput => ({
-        id: item.id,
-        slug: item.slug,
-        fieldData: {
-          [nameId]: { type: 'string', value: item.name },
-          [imageId]: { type: 'image', value: item.assets.items[0].source },
-          [enabledId]: { type: 'boolean', value: item.enabled },
-          [descriptionId]: { type: 'formattedText', value: item.description }
-        }
-      })
-    );
+    const collectionItems: ManagedCollectionItemInput[] = items.map(buildCollectionItems);
 
     await collection.addItems(collectionItems);
     setIsLoading(false);

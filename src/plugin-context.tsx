@@ -1,5 +1,4 @@
 import { framer } from 'framer-plugin';
-import { LocalStorageKeys } from './shared/constants/local-storage';
 import { createContext, FC, PropsWithChildren, useContext, useState } from 'react';
 
 export type PluginContext = {
@@ -8,6 +7,11 @@ export type PluginContext = {
   mode: string;
   isConnected: boolean;
   connect: (storefrontApiKey: string, shopId: string) => void;
+};
+
+export const LocalStorageKeys = {
+  StorefrontApiKey: 'x-vendyx-storefront-api-key',
+  ShopId: 'x-vendyx-shop-id'
 };
 
 const shopId = window.localStorage.getItem(LocalStorageKeys.ShopId) ?? '';
