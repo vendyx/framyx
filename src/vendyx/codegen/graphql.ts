@@ -788,7 +788,7 @@ export type VariantList = List & {
 export type SynchronizeProductsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type SynchronizeProductsQueryQuery = { __typename?: 'Query', products: { __typename?: 'ProductList', items: Array<{ __typename?: 'Product', id: string, name: string, slug: string, enabled: boolean, description?: string | null, assets: { __typename?: 'AssetList', items: Array<{ __typename?: 'Asset', id: string, source: string }> }, options: Array<{ __typename?: 'Option', id: string, name: string, values: Array<{ __typename?: 'OptionValue', id: string, name: string }> }>, variants: { __typename?: 'VariantList', items: Array<{ __typename?: 'Variant', stock: number, optionValues: Array<{ __typename?: 'OptionValue', id: string, name: string }> }> } }> } };
+export type SynchronizeProductsQueryQuery = { __typename?: 'Query', products: { __typename?: 'ProductList', items: Array<{ __typename?: 'Product', id: string, name: string, slug: string, enabled: boolean, description?: string | null, assets: { __typename?: 'AssetList', items: Array<{ __typename?: 'Asset', id: string, source: string }> }, options: Array<{ __typename?: 'Option', id: string, name: string, values: Array<{ __typename?: 'OptionValue', id: string, name: string }> }>, variants: { __typename?: 'VariantList', items: Array<{ __typename?: 'Variant', salePrice: number, stock: number, optionValues: Array<{ __typename?: 'OptionValue', id: string, name: string }> }> } }> } };
 
 export type CheckQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -839,6 +839,7 @@ export const SynchronizeProductsQueryDocument = new TypedDocumentString(`
       }
       variants {
         items {
+          salePrice
           stock
           optionValues {
             id

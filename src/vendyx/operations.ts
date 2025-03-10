@@ -25,6 +25,7 @@ export const SYNCHRONIZE_QUERY = graphql(`
         }
         variants {
           items {
+            salePrice
             stock
             optionValues {
               id
