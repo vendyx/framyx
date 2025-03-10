@@ -1,5 +1,6 @@
 import { usePluginContext } from '@/plugin-context';
 import { fetcher } from '@/vendyx/fetcher';
+import { CHECK_QUERY } from '@/vendyx/operations';
 import { framer } from 'framer-plugin';
 import { useState } from 'react';
 
@@ -26,12 +27,16 @@ export const useConnectForm = () => {
     }
 
     setIsLoading(true);
-    const check = await fetcher(CHECK_QUERY, {
-      headers: {
-        x_vendyx_shop_api_key: form.storefrontApiKey,
-        shop_id: form.shopId
+    const check = await fetcher(
+      CHECK_QUERY,
+      {},
+      {
+        headers: {
+          x_vendyx_shop_api_key: form.storefrontApiKey,
+          shop_id: form.shopId
+        }
       }
-    });
+    );
     setIsLoading(false);
 
     if (!check) {
@@ -48,17 +53,4 @@ export const useConnectForm = () => {
     setForm,
     onSubmit
   };
-};
-
-const CHECK_QUERY = `
-  query Check {
-    products {
-      count
-    }
-  }
-`;
-
-type FormInput = {
-  shopId: string;
-  storefrontApiKey: string;
 };

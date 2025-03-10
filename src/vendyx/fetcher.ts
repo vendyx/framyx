@@ -1,8 +1,14 @@
 import { LocalStorageKeys } from '@/plugin-context';
+import { TypedDocumentString } from './types';
 
-const BASE_URL = 'https://vendyx-api.up.railway.app/shop-api';
+export const BASE_URL = 'https://vendyx-api.up.railway.app/shop-api';
 
-export const fetcher = async (query: string, options?: Options) => {
+export const fetcher = async <R, V>(
+  query: TypedDocumentString<R, V>,
+  variables?: V,
+  options?: Options
+): Promise<R> => {
+  console.log({ BASE_URL });
   const storefrontApiKey = window.localStorage.getItem(LocalStorageKeys.StorefrontApiKey) ?? '';
   const shopId = window.localStorage.getItem(LocalStorageKeys.ShopId) ?? '';
 
@@ -15,8 +21,8 @@ export const fetcher = async (query: string, options?: Options) => {
       ...options?.headers
     },
     body: JSON.stringify({
-      query: query,
-      variables: options?.variables
+      query,
+      variables
     })
   });
 
@@ -24,13 +30,11 @@ export const fetcher = async (query: string, options?: Options) => {
 
   if (errors) {
     console.log(errors);
-    return null;
   }
 
   return data;
 };
 
 type Options = {
-  variables?: Record<string, unknown>;
   headers?: Record<string, string>;
 };
